@@ -18,7 +18,7 @@ case "$(uname -s)" in
 		mv ./gopass-${ASDF_INSTALL_VERSION}-darwin-amd64/gopass "${toolPath}"
 		;;
 	"Linux")
-		DOWNLOAD_URL="https://github.com/gopasspw/gopass/releases/download/v${ASDF_INSTALL_VERSION}/gopass-${SDF_INSTALL_VERSION}-linux-amd64.tar.gz"
+		DOWNLOAD_URL="https://github.com/gopasspw/gopass/releases/download/v${ASDF_INSTALL_VERSION}/gopass-${ASDF_INSTALL_VERSION}-linux-amd64.tar.gz"
 		curl -fL -o "${downloadPath}/gopass.tar.gz" "${DOWNLOAD_URL}"
 		tar xzf gopass.tar.gz
 		mv ./gopass-${ASDF_INSTALL_VERSION}-linux-amd64/gopass "${toolPath}"
