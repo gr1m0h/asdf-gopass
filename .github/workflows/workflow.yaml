@@ -1,0 +1,28 @@
+name: Main workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest]
+        version: [1.8.6]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      
+      - name: Install asdf-vm
+        run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
+      
+      - name: Install gopasspw/gopass and run test
+        run: |
+          . $HOME/asdf/asdf.sh
+          asdf plugin-add gopass $GITHUB_WORKSPACE
+          asdf list-all gopass
+          asdf install gopass ${{ matrix.version }}
+          asdf global gopass ${{ matrix.version }}
+          gopass --version
