@@ -5,5 +5,5 @@
 
 ## Install
 ```
-asdf plugin-add gopass https://github.com/grimoh/asdf-gopass.git
+asdf plugin add gopass https://github.com/grimoh/asdf-gopass.git
 ```
