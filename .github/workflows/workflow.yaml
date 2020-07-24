@@ -1,28 +1,33 @@
 name: Main workflow
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+  schedule:
+    - cron: "0 0 * * 5"
 
 jobs:
   build:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest]
-        version: [1.8.6]
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      
+        uses: actions/checkout@v2
+
       - name: Install asdf-vm
         run: git clone https://github.com/asdf-vm/asdf.git $HOME/asdf
-      
-      - name: Install gopasspw/gopass and run test
+
+      - name: Install gopass and run test
         run: |
           . $HOME/asdf/asdf.sh
-          asdf plugin-add gopass $GITHUB_WORKSPACE
-          asdf list-all gopass
-          asdf install gopass ${{ matrix.version }}
-          asdf global gopass ${{ matrix.version }}
-          gopass --version
+          asdf plugin add gopass https://github.com/grimoh/asdf-gopass.git
+          asdf list all gopass
+          asdf install gopass latest
