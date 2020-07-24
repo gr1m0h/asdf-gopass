@@ -15,6 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macOS-latest]
+        version: [1.9.2]
 
     runs-on: ${{ matrix.os }}
 
@@ -30,6 +31,6 @@ jobs:
           . $HOME/asdf/asdf.sh
           asdf plugin add gopass $GITHUB_WORKSPACE
           asdf list all gopass
-          asdf install gopass latest
-          asdf global gopass latest
+          asdf install gopass ${{ matrix.version }}
+          asdf global gopass ${{ matrix.version }}
           gopass --version
